@@ -14,14 +14,14 @@
 
         include("php/config.php");
         if(isset($_POST['submit'])){
-            $username = $POST['username'];
-            $email = $POST['email'];
-            $age = $POST['age'];
-            $password = $POST['password'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $age = $_POST['age'];
+            $password = $_POST['password'];
 
             // verifying the unique email
 
-        $verify_query = mysql_query($con, "SELECT Email FROM users WHERE Email='$email'");
+        $verify_query = mysqli_query($con, "SELECT Email FROM users WHERE Email='$email'");
 
         if(mysqli_num_rows($verify_query) !=0){
             echo "<div class='message'>
@@ -30,7 +30,7 @@
             echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
 
         }else{
-            mysli_query($con,"INSERT INTO user(Username,Email,Age,Password) VALUES('$username', '$email', '$age', '$password',)") or die ("Error Occurred");
+            mysqli_query($con,"INSERT INTO users(Username,Email,Age,Password) VALUES('$username', '$email', '$age', '$password')") or die ("Error Occurred");
             echo "<div class='message'>
                     <p>Registered Successfully!</p>
                     </div> <br>";
@@ -64,7 +64,7 @@
                 </div>
                 
                 <div class="field">
-                    <input type="submit" class="btn" name="submit" value="Sign Up">
+                    <input type="submit" class="btn" name="submit" value="Register">
                 </div>
 
                 <div class="links">
